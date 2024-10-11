@@ -1,8 +1,8 @@
-Layoffs Data Cleaning
+**Layoffs Data Cleaning**
 
 This repository contains SQL scripts for cleaning and preparing layoffs data for analysis. The main objective is to ensure data integrity by removing duplicates, standardizing entries, dealing with null or blank values, and eliminating irrelevant rows.
 SQL Scripts Overview
-1. Data Preparation
+**1. Data Preparation**
 
     Creating a Staging Table
     A copy of the raw dataset is created to facilitate data cleaning.
@@ -12,7 +12,7 @@ SQL Scripts Overview
     CREATE TABLE layoffs_staging LIKE layoffs;
     INSERT INTO layoffs_staging SELECT * FROM layoffs;
 
-2. Removing Duplicates
+**2. Removing Duplicates**
 
     Identifying Duplicates
     The script identifies duplicate records using a Common Table Expression (CTE).
@@ -55,7 +55,7 @@ sql
 
     DELETE FROM layoffs_staging2 WHERE row_num > 1;
 
-3. Standardizing Data
+**3. Standardizing Data**
 
     Trimming Whitespace and Updating Values
     Data is standardized by trimming unnecessary spaces and updating entries.
@@ -73,7 +73,7 @@ sql
     UPDATE layoffs_staging2 SET date = STR_TO_DATE(date, '%m/%d/%Y');
     ALTER TABLE layoffs_staging2 MODIFY COLUMN date DATE;
 
-4. Dealing with NULL Values
+**4. Dealing with NULL Values**
 
     Identifying and Updating NULL Entries
     Null or blank values are examined and updated where necessary.
@@ -92,7 +92,7 @@ sql
     SET t1.industry = t2.industry
     WHERE t1.industry IS NULL AND t2.industry IS NOT NULL;
 
-5. Removing Irrelevant or Incomplete Data
+**5. Removing Irrelevant or Incomplete Data**
 
     Deleting Irrelevant Rows
     Records with null values in critical fields are removed from the dataset.
